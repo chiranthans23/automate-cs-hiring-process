@@ -7,13 +7,12 @@ Puts hired students at the buttom with red color and rest on the top
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from credentials.read_creds import get_creds
+from credentials.read_creds import authenticate
 from config.config import cfg 
 
 
 def sort_sheet_hired():
-    creds = get_creds()
-    file = gspread.authorize(creds) 
+    file = authenticate()
     sheet = file.open(cfg['students_sheet_name'])
     sheet = sheet.get_worksheet(0)
 

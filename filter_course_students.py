@@ -6,15 +6,14 @@
 """
 
 import gspread
-from credentials.read_creds import get_creds
+from credentials.read_creds import authenticate
 from config.config import cfg 
 
 
 def filter_course(courses, instructor):
     res = []
 
-    creds = get_creds()
-    file = gspread.authorize(creds) 
+    file = authenticate()
     sheet = file.open(cfg['students_sheet_name'])
     sheet = sheet.get_worksheet(0)
 
@@ -33,17 +32,19 @@ def filter_course(courses, instructor):
     sh.share('chsr7576@colorado.edu', perm_type='user', role='writer')
     sh.share(instructor, perm_type='user', role='writer')
 
-    sh = sh.add_worksheet(title="sheet", rows=1000, cols=10)
+    sh = sh.add_worksheet(title="Students", rows=1000, cols=10)
     sh.update('A1', res)
     
     sh.format(f"A1:J1", {
             "backgroundColor": {
-            "blue": 0.1
+            "red": 0.678,
+            "blue": 0.902,
+            "green": 0.847
             }})
 
 
 if __name__ == '__main__':
 
-    filter_course(["CSCI 3656", "CSCI 5606"], "jed.brown@colorado.edu")
+    filter_course(["CSCI 3656", "CSCI 5606"], "chsr7576@colorado.edu")
         
 

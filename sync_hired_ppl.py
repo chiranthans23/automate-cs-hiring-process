@@ -7,14 +7,13 @@ to the available students sheet
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from credentials.read_creds import get_creds
+from credentials.read_creds import authenticate
 from config.config import cfg 
 from sort_hiring import sort_sheet_hired
 
 
 def sync_hired():
-    creds = get_creds()
-    file = gspread.authorize(creds) 
+    file = authenticate()
 
 
     sheet = file.open(cfg['hired_students_sheet_name'])
