@@ -13,6 +13,7 @@ from config.config import cfg
 
 def sort_sheet_hired():
     file = authenticate()
+    # todo
     sheet = file.open(cfg['students_sheet_name'])
     sheet = sheet.get_worksheet(0)
 
@@ -25,6 +26,13 @@ def sort_sheet_hired():
     sheet.update('A3', list_of_lists)
 
     list_of_lists = sheet.get_all_values()[2:]
+
+    sheet.format(f"A3:P", {
+            "backgroundColor": {
+            "red": 1.0,
+            "green": 1.0,
+            "blue": 1.0
+            }})
 
     for i, row in enumerate(list_of_lists):
         if row[1].strip().lower() == "hired":
