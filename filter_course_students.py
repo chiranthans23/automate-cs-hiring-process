@@ -20,11 +20,12 @@ def filter_course(courses, instructor):
 
     list_of_lists = sheet.get_all_values()[2:]
 
+
     res.append(["Email Address","First Name, Last Name", "Which position are you applying for?", "Your  major",	"If you are not a CS Major, please let us know the name of the faculty member who invited you to apply. Write N/A if it is not applicable.", "Your degree",	"Have you completed the selected course/s at CU Boulder during your academic career?",	"If yes, which courses have you completed.",	"Have you had any other experience related to the selected course/s. Please explain. Please DO NOT add details from your resume on this response.",	"Share your resume link."])
     
     for row in list_of_lists:
         for course in courses:
-            if course in row[10] or course in row[11]:
+            if (course in row[10] or course in row[11]) and row[1] == 'Available':
                 res.append(row[2:4]+row[6:10]+row[12:])
                 break
 
@@ -45,6 +46,6 @@ def filter_course(courses, instructor):
 
 if __name__ == '__main__':
 
-    filter_course(["CSCI 3656", "CSCI 5606"], "chsr7576@colorado.edu")
+    filter_course(["CSCI 5454"], "srirams@colorado.edu")
         
 
