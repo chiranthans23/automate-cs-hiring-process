@@ -30,7 +30,7 @@ def sync_hired():
     list_of_lists = sheet.get_all_values()[2:]
 
     for i, row in enumerate(list_of_lists):
-        if row[1].lower()!='hired' and row[2].strip().lower() in emails:
+        if row[1].lower()!='hired' and (row[2].strip().lower() in emails or row[4].strip().lower() in emails):
             sheet.update_cell(i+3,2, 'Hired')
 
     sort_sheet_hired()
